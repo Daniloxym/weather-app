@@ -1,0 +1,60 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'DM Sans';
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Bricole Grotesque';
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/Bricolage_Grotesque/BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf') format('truetype');
+}
+
+@theme {
+  --color-neutral-900: hsl(243, 96%, 9%);
+  --color-neutral-800: hsl(243, 27%, 20%);
+  --color-neutral-700: hsl(243, 23%, 24%);
+  --color-neutral-600: hsl(243, 23%, 30%);
+  --color-neutral-300: hsl(240, 6%, 70%);
+  --color-neutral-200: hsl(250, 6%, 84%);
+  --color-neutral-0: hsl(0, 0%, 100%);
+
+  --color-orange-500: hsl(28, 100%, 52%);
+
+  --color-blue-500: hsl(233, 67%, 56%);
+  --color-blue-700: hsl(248, 70%, 36%);
+}
+
+body {
+  background-color: var(--color-neutral-900);
+  font-family: 'Bricole Grotesque', sans-serif;
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--color-neutral-700);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-neutral-300);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neutral-200);
+}
+
+/* Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-neutral-300) var(--color-neutral-700);
+}
