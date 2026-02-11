@@ -3,6 +3,7 @@ import HeroSection from './components/Hero/HeroSection';
 import Results from './components/Results/Results';
 import { useState } from 'react';
 import type { City } from './types';
+import { UnitsProvider } from './context/UnitsContext';
 
 function App() {
   const [cities, setCities] = useState<City[]>([]);
@@ -11,7 +12,7 @@ function App() {
   const [city, setCity] = useState<City | null>(null);
 
   return (
-    <>
+    <UnitsProvider>
       <Header />
       <main>
         <HeroSection
@@ -27,7 +28,7 @@ function App() {
         )}
         {city !== null && <Results city={city} />}
       </main>
-    </>
+    </UnitsProvider>
   );
 }
 

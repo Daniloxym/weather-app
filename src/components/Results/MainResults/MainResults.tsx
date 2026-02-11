@@ -2,6 +2,7 @@ import Daily from './Daily';
 import type { City, Welcome } from '../../../types';
 import { calculateDate } from '../../../utils/calculateDate';
 import { getWeatherIcon } from '../../../utils/getWeatherIcon';
+import { useUnits } from '../../../context/UnitsContext';
 
 interface Props {
   city: City | null;
@@ -9,6 +10,11 @@ interface Props {
 }
 
 export default function MainResults({ city, weatherData }: Props) {
+  const { windSpeedUnit, precipitationUnit } = useUnits();
+
+  const windLabel = windSpeedUnit === 'kmh' ? 'km/h' : 'mph';
+  const precipLabel = precipitationUnit === 'mm' ? 'mm' : 'in';
+
   return (
     <div>
       <div
@@ -41,12 +47,12 @@ export default function MainResults({ city, weatherData }: Props) {
 
         <div className='p-4 bg-neutral-600 rounded-lg flex flex-col gap-2 text-neutral-0'>
           <span>Wind</span>
-          <span className='text-3xl'>{weatherData?.current.wind_speed_10m} km/h</span>
+          <span className='text-3xl'>{weatherData?.current.wind_speed_10m} {windLabel}</span>
         </div>
 
         <div className='p-4 bg-neutral-600 rounded-lg flex flex-col gap-2 text-neutral-0'>
           <span>Precipitation</span>
-          <span className='text-3xl'>{weatherData?.current.precipitation} mm</span>
+          <span className='text-3xl'>{weatherData?.current.precipitation} {precipLabel}</span>
         </div>
       </div>
       <Daily weatherData={weatherData} />

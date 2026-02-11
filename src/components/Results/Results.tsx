@@ -4,6 +4,7 @@ import ResultLoading from './MainResults/ResultLoading';
 import type { City, Welcome } from '../../types';
 import { fetchCityWeather } from '../../services/cities';
 import { useEffect, useState } from 'react';
+import { useUnits } from '../../context/UnitsContext';
 
 interface Props {
   city: City | null;
@@ -12,13 +13,18 @@ interface Props {
 export default function Results({ city }: Props) {
   const [weatherData, setWeatherData] = useState<Welcome | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { temperatureUnit, windSpeedUnit, precipitationUnit } = useUnits();
 
   useEffect(() => {
     const handleWeatherFetch = async () => {
       if (city) {
         setIsLoading(true);
         try {
-          const data = await fetchCityWeather(city.latitude, city.longitude);
+          const data = await fetchCityWeather(city.latitude, city.longitude, {
+            temperatureUnit,
+            windSpeedUnit,
+            precipitationUnit,
+          });
           setWeatherData(data);
           console.log(data);
         } catch (error) {
@@ -29,7 +35,7 @@ export default function Results({ city }: Props) {
       }
     };
     handleWeatherFetch();
-  }, [city]);
+  }, [city, temperatureUnit, windSpeedUnit, precipitationUnit]);
 
   if (isLoading) {
     return (
